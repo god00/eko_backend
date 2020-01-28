@@ -53,7 +53,7 @@ server.use(express.json({ limit: '1mb' }));
 server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(compression())
-server.use(express.static(path.join(path.resolve(__dirname, '../'), 'deliver-apps/build')));   // path to frontend
+server.use(express.static(path.join(path.resolve(__dirname, '../'), 'eko_backend/build')));   // path to frontend
 server.use(contentLength.validateMax({ max: MAX_CONTENT_LENGTH_ACCEPTED, status: 429, message: "stop it!" })); // max size accepted for the content-length
 
 module.exports = server;
