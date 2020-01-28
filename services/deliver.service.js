@@ -54,13 +54,17 @@ exports.calculateCost = (str, routes, cacheForMinimunCost) => {
 
 exports.possibleRoute = (source, destination, routes, condition = { allowRouteTwice: false }) => {
     let result = 0;
-    const paths = {};
+    const paths = {
+        pathArr: [],
+        costOrdered: []
+    };
     const calculatedPossibleRoute = (source, destination, condition, count = 0, trackRoute = '', totalCost = 0, path = source, costs = '') => {
         if (condition.maximunStop != null && count > condition.maximunStop) return;
         if (condition.lessThan != null && totalCost >= condition.lessThan) return;
         if (source === destination && count !== 0) {
             ++result;
-            paths[path] = costs.slice(0, -1).split(',').map(cost => parseInt(cost));
+            paths.pathArr.push(path);
+            paths.costOrdered.push(costs.slice(0, -1).split(',').map(cost => parseInt(cost)));
             if (condition.lessThan == null || !condition.allowRouteTwice) return;
         }
 
